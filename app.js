@@ -230,15 +230,62 @@ const MEMBERS = [
 ];
 
 /* ==========================================================================
+   TEAM TASKS — những task nhóm có thể nhận
+   ========================================================================== */
+const TEAM_TASKS = [
+  {
+    icon: '',
+    title: 'Phát triển Web / App Full-stack',
+    desc: 'Xây dựng ứng dụng từ giao diện đến máy chủ: front-end (React, Vue), back-end (Node.js, Spring Boot) và triển khai cloud.',
+    basis: 'Dựa trên kỹ năng JavaScript/TypeScript (92%), Java & Spring Boot (90%), kinh nghiệm thực tế tại các công ty phần mềm của các thành viên.',
+    tags: ['React', 'Vue', 'Node.js', 'Spring Boot'],
+  },
+  {
+    icon: '',
+    title: 'Thiết kế & tối ưu hệ thống dữ liệu',
+    desc: 'Thiết kế schema, tối ưu query, xây dựng data pipeline và kho dữ liệu phục vụ phân tích hành vi người dùng.',
+    basis: 'Dựa trên kỹ năng PostgreSQL/Redis (85%), Golang (75%), dự án DataLake Mini và PayStream xử lý giao dịch 99.9% uptime.',
+    tags: ['PostgreSQL', 'Redis', 'Kafka', 'Spark'],
+  },
+  {
+    icon: '',
+    title: 'UI/UX Design & Design System',
+    desc: 'Nghiên cứu người dùng, tạo prototype Figma, xây dựng design system nhất quán cho sản phẩm số đa nền tảng.',
+    basis: 'Dựa trên kỹ năng Figma (95%), Prototyping (90%), kinh nghiệm thiết kế 6 sản phẩm số tại Studio Sáng tạo Mộc.',
+    tags: ['Figma', 'UX Research', 'Design System', 'Prototyping'],
+  },
+  {
+    icon: '',
+    title: 'DevOps, CI/CD & Hạ tầng đám mây',
+    desc: 'Thiết lập pipeline tự động hóa triển khai, giám sát hệ thống và quản lý hạ tầng trên AWS/GCP với Docker & Kubernetes.',
+    basis: 'Dựa trên kỹ năng CI/CD (88%), Docker & Kubernetes (84%), kinh nghiệm giảm 40% thời gian phát hành tại Trung tâm Dữ liệu VNC.',
+    tags: ['Docker', 'Kubernetes', 'AWS', 'GitHub Actions'],
+  },
+  {
+    icon: '',
+    title: 'Tư vấn kiến trúc & Microservices',
+    desc: 'Tư vấn lựa chọn kiến trúc phần mềm phù hợp, thiết kế hệ thống vi dịch vụ có khả năng mở rộng và chịu lỗi cao.',
+    basis: 'Dựa trên kỹ năng Kiến trúc Microservices (80%), đề tài tốt nghiệp về hệ thống CI/CD vi dịch vụ và kinh nghiệm hệ thống tài chính FinPay.',
+    tags: ['Microservices', 'System Design', 'Golang', 'Java'],
+  },
+  {
+    icon: '',
+    title: 'Branding & Nhận diện thương hiệu số',
+    desc: 'Thiết kế bộ nhận diện thương hiệu, visual identity và tài liệu truyền thông số cho doanh nghiệp và sản phẩm.',
+    basis: 'Dựa trên dự án nhận diện thương hiệu Local Coffee và bộ component Mộc UI, kết hợp tư duy thẩm mỹ và dữ liệu hành vi.',
+    tags: ['Branding', 'Illustration', 'Figma', 'Design Tokens'],
+  },
+];
+
+/* ==========================================================================
    CV SECTION DEFINITIONS
    ========================================================================== */
 const CV_SECTIONS = [
   { key: 'intro',      label: 'Giới thiệu' },
   { key: 'personal',   label: 'Thông tin cá nhân' },
-  { key: 'education',  label: 'Học vấn' },
-  { key: 'skills',     label: 'Kỹ năng' },
   { key: 'experience', label: 'Kinh nghiệm' },
   { key: 'projects',   label: 'Dự án' },
+  { key: 'skills',     label: 'Kỹ năng' },
   { key: 'contact',    label: 'Liên hệ' },
 ];
 
@@ -547,7 +594,7 @@ function goToCv(index) {
         setActiveNav(CV_SECTIONS[0].key);
 
         // Tua tới CV content
-        const cvContent = document.getElementById('sec-intro');
+        const cvContent = document.getElementById('cvView');
 
         if (cvContent) {
             cvContent.scrollIntoView({
@@ -600,10 +647,34 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ==========================================================================
+   TEAM TASKS RENDERING
+   ========================================================================== */
+function renderTeamTasks() {
+  const container = document.getElementById('teamTasksGrid');
+  if (!container) return;
+
+  container.innerHTML = TEAM_TASKS.map((task, i) => `
+    <article class="task-card" style="--delay:${i * 60}ms">
+      <div class="task-card__icon" aria-hidden="true">${task.icon}</div>
+      <h3 class="task-card__title">${escapeHtml(task.title)}</h3>
+      <p class="task-card__desc">${escapeHtml(task.desc)}</p>
+      <div class="task-card__basis">
+        <span class="task-card__basis-label">Cơ sở</span>
+        <p class="task-card__basis-text">${escapeHtml(task.basis)}</p>
+      </div>
+      <div class="task-card__tags">
+        ${task.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ==========================================================================
    INIT
    ========================================================================== */
 function init() {
   renderTeamGrid();
+  renderTeamTasks();
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
