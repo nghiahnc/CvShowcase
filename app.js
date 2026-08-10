@@ -273,7 +273,7 @@ const TEAM_TASKS = [
     title: 'Branding & Nhận diện thương hiệu số',
     desc: 'Thiết kế bộ nhận diện thương hiệu, visual identity và tài liệu truyền thông số cho doanh nghiệp và sản phẩm.',
     basis: 'Dựa trên dự án nhận diện thương hiệu Local Coffee và bộ component Mộc UI, kết hợp tư duy thẩm mỹ và dữ liệu hành vi.',
-    tags: ['Branding', 'Illustration', 'Figma', 'Design Tokens'],
+    tags: ['Branding', 'Illustration', 'Figma', 'Design Token'],
   },
 ];
 
