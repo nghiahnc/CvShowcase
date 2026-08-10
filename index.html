@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Đội ngũ &mdash; Hồ sơ thành viên</title>
+<meta name="description" content="Trang giới thiệu thành viên và hồ sơ năng lực (CV) của nhóm.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient background layer -->
+<div class="bg-field" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--a"></div>
+  <div class="bg-glow bg-glow--b"></div>
+</div>
+
+<div class="stage" id="stage">
+
+  <!-- ============ TEAM GRID VIEW ============ -->
+  <section class="view view--showcase" id="showcaseView" aria-label="Giới thiệu thành viên">
+
+    <header class="brandbar">
+      <span class="brandbar__mark" aria-hidden="true">◆</span>
+      <span class="brandbar__text">ĐỘI NGŨ<span class="brandbar__dim">.DEV</span></span>
+    </header>
+
+    <div class="team-hero">
+      <div class="team-hero__label" aria-hidden="true">
+        <span class="team-hero__dot"></span>Nhóm dự án
+      </div>
+      <h1 class="team-title">
+        Gặp gỡ<br><span class="team-title__accent">đội ngũ</span>
+      </h1>
+      <p class="team-subtitle">Bốn thành viên &mdash; một mục tiêu: xây dựng những sản phẩm số đáng nhớ.</p>
+    </div>
+
+    <div class="team-grid" id="teamGrid" role="list" aria-label="Danh sách thành viên">
+      <!-- Member cards injected by app.js -->
+    </div>
+
+  </section>
+
+  <!-- ============ CV VIEW ============ -->
+  <section class="view view--cv" id="cvView" aria-label="Hồ sơ năng lực" hidden>
+
+    <aside class="cv-side" id="cvSide">
+      <button class="btn btn--back" id="backBtn" type="button">
+        <span class="btn__icon btn__icon--back" aria-hidden="true">←</span>
+        <span class="btn__label">Quay lại</span>
+      </button>
+
+      <div class="cv-side__profile" id="cvSideProfile">
+        <div class="cv-avatar">
+          <img class="cv-avatar__img" id="cvAvatarImg" src="" alt="">
+        </div>
+        <p class="id-tag id-tag--side" id="cvIdTag">
+          <span class="id-tag__dot" aria-hidden="true"></span>
+          <span id="cvIdTagText">ID · 01</span>
+        </p>
+        <h2 class="cv-side__name" id="cvName">—</h2>
+        <p class="cv-side__major" id="cvMajor">—</p>
+      </div>
+
+      <ul class="cv-side__nav" id="cvSideNav" aria-label="Điều hướng mục CV"></ul>
+    </aside>
+
+    <div class="cv-content" id="cvContent">
+      <!-- Sections injected by app.js -->
+    </div>
+
+  </section>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
