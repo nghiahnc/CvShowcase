@@ -6,7 +6,7 @@
 const MEMBERS = [
   {
     id: 'm1',
-    name: 'Nguyễn Minh Khang',
+    name: 'Nguyễn Văn A',
     major: 'Công nghệ thông tin',
     avatar: 'avatar1.png',
     shortBio:
@@ -71,7 +71,7 @@ const MEMBERS = [
   },
   {
     id: 'm2',
-    name: 'Trần Bảo Ngọc',
+    name: 'Trần Văn B',
     major: 'Khoa học máy tính',
     avatar: 'avatar2.png',
     shortBio:
@@ -124,7 +124,7 @@ const MEMBERS = [
   },
   {
     id: 'm3',
-    name: 'Lê Phương Anh',
+    name: 'Lê Thị C',
     major: 'Thiết kế đồ họa & UI/UX',
     avatar: 'avatar3.png',
     shortBio:
@@ -176,7 +176,7 @@ const MEMBERS = [
   },
   {
     id: 'm4',
-    name: 'Phạm Đức Huy',
+    name: 'Phạm Văn D',
     major: 'Kỹ thuật phần mềm',
     avatar: 'avatar4.png',
     shortBio:
