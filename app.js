@@ -10,7 +10,8 @@ const MEMBERS = [
     major: 'Công nghệ thông tin',
     avatar: 'avt5.png',
     shortBio:
-'Tôi là sinh viên ngành Công nghệ thông tin, định hướng phát triển trong lĩnh vực Full-stack, IoT và mô phỏng hệ thống. Tôi có nền tảng về C#/.NET, ASP.NET, JavaScript/TypeScript, SQL Server và kinh nghiệm thực hành với ESP32, Máy In 3D, cảm biến cùng các hệ thống IoT. Bên cạnh lập trình, tôi có khả năng làm việc với Blender và công nghệ 3D, hỗ trợ phát triển các bài toán mô phỏng và trực quan hóa. Qua các dự án học tập, dự án cá nhân và quá trình thực tập Backend, tôi đã rèn luyện khả năng xây dựng, tích hợp và vận hành hệ thống. Tôi mong muốn được phát triển trong môi trường công nghệ thực tế, đặc biệt ở các lĩnh vực IoT, tự động hóa, mô phỏng và hệ thống thông minh.',  
+      'Tôi là sinh viên ngành Thiết kế Đồ họa (Graphic Design), định hướng phát triển trong lĩnh vực thiết kế và dựng hình 3D. Tôi tập trung vào 3D modeling, environment design, lighting, material và rendering bằng Blender, đồng thời sử dụng Adobe Photoshop, Illustrator và Figma để hỗ trợ quá trình phát triển và trình bày dự án. Thông qua các đồ án học tập và dự án cá nhân, tôi đã rèn luyện khả năng xây dựng ý tưởng, triển khai mô hình và hoàn thiện sản phẩm 3D với bố cục và hình ảnh nhất quán. Tôi mong muốn tiếp tục học hỏi, tích lũy kinh nghiệm thực tế và phát triển chuyên môn trong môi trường thiết kế sáng tạo.',
+  
 skills: [
   { name: 'C# / .NET', level: 88 },
   { name: 'ASP.NET MVC / Web API', level: 85 },
@@ -355,6 +356,7 @@ let isTransitioning = false; // guard against double-clicks/taps
 const el = {
   showcaseView: document.getElementById('showcaseView'),
   teamGrid:     document.getElementById('teamGrid'),
+  cvAnchor:     document.getElementById('cvAnchor'),
   cvView:       document.getElementById('cvView'),
   cvAvatarImg:  document.getElementById('cvAvatarImg'),
   cvName:       document.getElementById('cvName'),
@@ -632,7 +634,12 @@ function goToCv(index) {
     observeSections();
     setActiveNav(CV_SECTIONS[0].key);
 
-    el.cvView.scrollIntoView({
+    // Cuộn tới mốc ảo cố định (không animation, không đổi vị trí) thay
+    // vì cuộn tới chính cvView — cvView vừa nhận class 'is-entering'
+    // (transform/opacity đang chạy), nên nếu lấy nó làm đích, đích sẽ
+    // xê dịch ngay trong lúc trình duyệt đang cuộn tới, khiến trên
+    // điện thoại cuộn không bao giờ tới đúng chỗ.
+    el.cvAnchor.scrollIntoView({
         behavior: prefersReducedMotion ? 'auto' : 'smooth',
         block: 'start',
     });
