@@ -8,7 +8,7 @@ const MEMBERS = [
     id: 'm1',
     name: 'Huỳnh Nguyễn Chí Nghĩa',
     major: 'Công nghệ thông tin',
-    avatar: 'avt2.JPG',
+    avatar: 'avt5.png',
     shortBio:
       'Tôi là sinh viên ngành Thiết kế Đồ họa (Graphic Design), định hướng phát triển trong lĩnh vực thiết kế và dựng hình 3D. Tôi tập trung vào 3D modeling, environment design, lighting, material và rendering bằng Blender, đồng thời sử dụng Adobe Photoshop, Illustrator và Figma để hỗ trợ quá trình phát triển và trình bày dự án. Thông qua các đồ án học tập và dự án cá nhân, tôi đã rèn luyện khả năng xây dựng ý tưởng, triển khai mô hình và hoàn thiện sản phẩm 3D với bố cục và hình ảnh nhất quán. Tôi mong muốn tiếp tục học hỏi, tích lũy kinh nghiệm thực tế và phát triển chuyên môn trong môi trường thiết kế sáng tạo.',
   
