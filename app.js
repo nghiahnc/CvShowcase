@@ -10,8 +10,7 @@ const MEMBERS = [
     major: 'Công nghệ thông tin',
     avatar: 'avt5.png',
     shortBio:
-      'Tôi là sinh viên ngành Thiết kế Đồ họa (Graphic Design), định hướng phát triển trong lĩnh vực thiết kế và dựng hình 3D. Tôi tập trung vào 3D modeling, environment design, lighting, material và rendering bằng Blender, đồng thời sử dụng Adobe Photoshop, Illustrator và Figma để hỗ trợ quá trình phát triển và trình bày dự án. Thông qua các đồ án học tập và dự án cá nhân, tôi đã rèn luyện khả năng xây dựng ý tưởng, triển khai mô hình và hoàn thiện sản phẩm 3D với bố cục và hình ảnh nhất quán. Tôi mong muốn tiếp tục học hỏi, tích lũy kinh nghiệm thực tế và phát triển chuyên môn trong môi trường thiết kế sáng tạo.',
-  
+'Tôi là sinh viên ngành Công nghệ thông tin, định hướng phát triển trong lĩnh vực Full-stack, IoT và mô phỏng hệ thống. Tôi có nền tảng về C#/.NET, ASP.NET, JavaScript/TypeScript, SQL Server và kinh nghiệm thực hành với ESP32, Máy In 3D, cảm biến cùng các hệ thống IoT. Bên cạnh lập trình, tôi có khả năng làm việc với Blender và công nghệ 3D, hỗ trợ phát triển các bài toán mô phỏng và trực quan hóa. Qua các dự án học tập, dự án cá nhân và quá trình thực tập Backend, tôi đã rèn luyện khả năng xây dựng, tích hợp và vận hành hệ thống. Tôi mong muốn được phát triển trong môi trường công nghệ thực tế, đặc biệt ở các lĩnh vực IoT, tự động hóa, mô phỏng và hệ thống thông minh.',  
 skills: [
   { name: 'C# / .NET', level: 88 },
   { name: 'ASP.NET MVC / Web API', level: 85 },
@@ -621,13 +620,11 @@ function goToCv(index) {
     renderCvContent(index);
     el.cvAvatarImg.classList.add('is-visible');
 
-    // Không ẩn showcase, không hoán đổi view — chỉ hiện khối CV
-    // (nếu đang ẩn lần đầu) và tua/cuộn mượt tới đó. Cả hai khối
-    // luôn tồn tại trong luồng trang.
-    if (el.cvView.hidden) {
-        el.cvView.hidden = false;
-        void el.cvView.offsetWidth; // ép reflow để hiệu ứng fade-in chạy đúng
-    }
+    // Không ẩn showcase, không hoán đổi view — chỉ hiện khối CV và
+    // tua/cuộn mượt tới đó. Cả hai khối luôn tồn tại trong luồng trang.
+    // Khối CV đã được "làm nóng" (layout sẵn) từ lúc tải trang, nên chỉ
+    // cần gỡ style làm-nóng để nó vào đúng vị trí trong luồng trang.
+    unwarmCvView();
     el.cvView.classList.remove('is-leaving');
     el.cvView.classList.add('is-entering');
 
@@ -699,10 +696,55 @@ function renderTeamTasks() {
 /* ==========================================================================
    INIT
    ========================================================================== */
+// Lần đầu cvView chuyển từ display:none sang hiển thị, trình duyệt phải
+// layout + paint toàn bộ khối CV (nhiều section, skill bar...) cùng lúc
+// với animation cuộn -> giật. Để tránh việc này, ta "làm nóng" khối CV
+// ngay lúc tải trang: dựng sẵn nội dung + hiện nó trong layout (nhưng
+// đặt tuyệt đối, vô hình, không chiếm chỗ) để trình duyệt tính layout
+// từ trước. Khi người dùng bấm "Xem CV" lần đầu, chỉ còn việc gỡ style
+// làm-nóng rồi cuộn tới — không còn việc layout nặng nào phát sinh.
+function prewarmCvView() {
+  if (!MEMBERS.length) return;
+
+  renderCvContent(0);
+
+  el.cvView.hidden = false;
+  el.cvView.style.position = 'absolute';
+  el.cvView.style.visibility = 'hidden';
+  el.cvView.style.pointerEvents = 'none';
+  el.cvView.style.top = '0';
+  el.cvView.style.left = '0';
+  el.cvView.style.width = '100%';
+
+  // Buộc trình duyệt tính layout ngay bây giờ, lúc rảnh, thay vì để dồn
+  // vào đúng lúc người dùng bấm.
+  void el.cvView.offsetHeight;
+}
+
+function unwarmCvView() {
+  el.cvView.style.position = '';
+  el.cvView.style.visibility = '';
+  el.cvView.style.pointerEvents = '';
+  el.cvView.style.top = '';
+  el.cvView.style.left = '';
+  el.cvView.style.width = '';
+}
+
+// Preload sẵn ảnh đại diện của tất cả thành viên để lúc mở CV, ảnh
+// hiện ra ngay, không kéo theo layout shift giữa chừng animation cuộn.
+function preloadAvatars() {
+  MEMBERS.forEach((m) => {
+    const img = new Image();
+    img.src = m.avatar;
+  });
+}
+
 function init() {
   renderTeamGrid();
   renderTeamTasks();
   window.scrollTo({ top: 0, behavior: 'auto' });
+  preloadAvatars();
+  prewarmCvView();
 }
 
 init();
