@@ -10,7 +10,7 @@ const MEMBERS = [
     major: 'Công nghệ thông tin',
     avatar: 'avt5.png',
     shortBio:
-      'Tôi là sinh viên ngành Thiết kế Đồ họa (Graphic Design), định hướng phát triển trong lĩnh vực thiết kế và dựng hình 3D. Tôi tập trung vào 3D modeling, environment design, lighting, material và rendering bằng Blender, đồng thời sử dụng Adobe Photoshop, Illustrator và Figma để hỗ trợ quá trình phát triển và trình bày dự án. Thông qua các đồ án học tập và dự án cá nhân, tôi đã rèn luyện khả năng xây dựng ý tưởng, triển khai mô hình và hoàn thiện sản phẩm 3D với bố cục và hình ảnh nhất quán. Tôi mong muốn tiếp tục học hỏi, tích lũy kinh nghiệm thực tế và phát triển chuyên môn trong môi trường thiết kế sáng tạo.',
+      'Tôi là sinh viên ngành Công nghệ thông tin, định hướng phát triển trong lĩnh vực Full-stack, IoT và mô phỏng hệ thống. Tôi có nền tảng về C#/.NET, ASP.NET, JavaScript/TypeScript, SQL Server và kinh nghiệm thực hành với ESP32, Máy In 3D, cảm biến cùng các hệ thống IoT. Bên cạnh lập trình, tôi có khả năng làm việc với Blender và công nghệ 3D, hỗ trợ phát triển các bài toán mô phỏng và trực quan hóa. Qua các dự án học tập, dự án cá nhân và quá trình thực tập Backend, tôi đã rèn luyện khả năng xây dựng, tích hợp và vận hành hệ thống. Tôi mong muốn được phát triển trong môi trường công nghệ thực tế, đặc biệt ở các lĩnh vực IoT, tự động hóa, mô phỏng và hệ thống thông minh.',
   
 skills: [
   { name: 'C# / .NET', level: 88 },
