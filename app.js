@@ -60,6 +60,7 @@ projects: [
     contact: [
       { label: 'Email', value: 'nghiahn1308@gmail.com', icon: '@',  href: ''},
       { label: 'Điện thoại', value: '0389 371 488', icon: '#', href: 'tel:0389371488' },
+       { label: 'Github', value: 'Nghiahnc', icon: '#', href: 'https://github.com/nghiahnc' },
     ],
       education: [
       {
@@ -194,6 +195,7 @@ projects: [
     contact: [
       { label: 'Email', value: 'trambuithibich.cs191654@gmail.com', icon: '', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=trambuithibich.cs191654@gmail.com' },
       { label: 'Điện thoại', value: '0937 888 014', icon: '#', href: 'tel:0937888014' },
+         
     ],
       education: [
       {
