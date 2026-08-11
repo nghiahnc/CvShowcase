@@ -615,76 +615,51 @@ function getCardEl(index) {
    ========================================================================== */
 function goToCv(index) {
     if (isTransitioning) return;
-
     isTransitioning = true;
     selectedIndex = index;
 
     renderCvContent(index);
     el.cvAvatarImg.classList.add('is-visible');
 
-    // window.scrollTo({
-    //     top: 0,
-    //     left: 0,
-    //     behavior: 'auto'
-    // });
-
-    // el.showcaseView.classList.remove('is-entering');
-    // el.showcaseView.classList.add('is-leaving');
-
-    setTimeout(() => {
-        el.showcaseView.hidden = true;
-
+    // Không ẩn showcase, không hoán đổi view — chỉ hiện khối CV
+    // (nếu đang ẩn lần đầu) và tua/cuộn mượt tới đó. Cả hai khối
+    // luôn tồn tại trong luồng trang.
+    if (el.cvView.hidden) {
         el.cvView.hidden = false;
+        void el.cvView.offsetWidth; // ép reflow để hiệu ứng fade-in chạy đúng
+    }
+    el.cvView.classList.remove('is-leaving');
+    el.cvView.classList.add('is-entering');
 
-        void el.cvView.offsetWidth;
+    revealSections();
+    observeSections();
+    setActiveNav(CV_SECTIONS[0].key);
 
-        el.cvView.classList.remove('is-leaving');
-        el.cvView.classList.add('is-entering');
+    el.cvView.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+    });
 
-        revealSections();
-        observeSections();
-        setActiveNav(CV_SECTIONS[0].key);
+    el.backBtn.focus({ preventScroll: true });
 
-        // Tua tới CV content
-        const cvContent = document.getElementById('cvView');
-
-        if (cvContent) {
-            cvContent.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        el.backBtn.focus({ preventScroll: true });
-
-        isTransitioning = false;
-    }, VIEW_TRANSITION_MS);
+    isTransitioning = false;
 }
 
 function goToShowcase() {
   if (isTransitioning) return;
   isTransitioning = true;
 
-  sectionObserver?.disconnect();
+  // Chỉ tua ngược lại phần danh sách thành viên — khối CV vẫn
+  // giữ nguyên trong trang, không bị ẩn đi.
+  el.showcaseView.scrollIntoView({
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    block: 'start',
+  });
 
-  el.cvView.classList.remove('is-entering');
-  el.cvView.classList.add('is-leaving');
-  el.cvAvatarImg.classList.remove('is-visible');
+  const cardEl = getCardEl(selectedIndex);
+  cardEl?.querySelector('.btn--card-cv')?.focus({ preventScroll: true });
 
-  setTimeout(() => {
-    el.cvView.hidden = true;
-
-    el.showcaseView.hidden = false;
-    void el.showcaseView.offsetWidth;
-    el.showcaseView.classList.remove('is-leaving');
-    el.showcaseView.classList.add('is-entering');
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-
-    const cardEl = getCardEl(selectedIndex);
-    cardEl?.querySelector('.btn--card-cv')?.focus({ preventScroll: true });
-
-    isTransitioning = false;
-  }, VIEW_TRANSITION_MS);
+  isTransitioning = false;
 }
 
 /* ==========================================================================
